@@ -23,16 +23,16 @@ from boxbranding import getBoxType, getMachineBrand, getMachineName, getDriverDa
 try:    
    
     #VU Boxen
-    elif getBoxType() == "vuduo":
+    elif getBoxType().startswith('vu'):
         box = "vuduo"
         boxname = "VU+Duo"
-    elif getBoxType() == "vuduo2":
+    elif getBoxType().startswith('vu')::
         box = "vuduo"
         boxname = "VU+Duo2"
-    elif getBoxType() == "vusolo":
+    elif getBoxType().startswith('vu'):
         box = "vusolo"
         boxname = "VU+Solo"
-    elif getBoxType() == "vusolo2":
+    elif getBoxType().startswith('vu'):
         box = "vusolo"
         boxname = "VU+Solo2"
     #GigaBlues
@@ -43,7 +43,7 @@ try:
         box = "gbquad"
         boxname = "GigaBlue"
    #Dreambox
-    elif getBoxType() == "dm800se":
+    elif getBoxType().startswith('dm'):
         box = "dreambox"
         boxname = "Dreambox"
     
