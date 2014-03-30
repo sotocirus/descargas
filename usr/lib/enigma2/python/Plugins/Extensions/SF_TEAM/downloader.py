@@ -21,18 +21,30 @@ import sys
 from boxbranding import getBoxType, getMachineBrand, getMachineName, getDriverDate, getImageVersion, getImageBuild, getBrandOEM
 
 try:    
-   
+    #ET Boxen
+    if getBoxType().startswith('et9'):
+        box = "et9000"
+        boxname = "ET9x00"
+    elif getBoxType().startswith('et6'):
+        box = "et9000"
+        boxname = "ET6x00"
+    elif getBoxType().startswith('et5'):
+        box = "et9000"
+        boxname = "ET5x00"
+    elif getBoxType().startswith('et4'):
+        box = "et9000"
+        boxname = "ET4x00"
     #VU Boxen
-    elif getBoxType().startswith('vu'):
+    elif getBoxType() == "vuduo":
         box = "vuduo"
         boxname = "VU+Duo"
-    elif getBoxType().startswith('vu')::
+    elif getBoxType() == "vuduo2":
         box = "vuduo"
         boxname = "VU+Duo2"
-    elif getBoxType().startswith('vu'):
+    elif getBoxType() == "vusolo":
         box = "vusolo"
         boxname = "VU+Solo"
-    elif getBoxType().startswith('vu'):
+    elif getBoxType() == "vusolo2":
         box = "vusolo"
         boxname = "VU+Solo2"
     #GigaBlues
@@ -42,11 +54,48 @@ try:
     elif getBoxType() == "gbquad":
         box = "gbquad"
         boxname = "GigaBlue"
-   #Dreambox
-    elif getBoxType().startswith('dm'):
+    #Technomates
+    elif getBoxType() == "tmtwin":
+        box = "tmtwin"
+        boxname = "TM-Twin"
+    elif getBoxType() == "tm2t":
+        box = "tmtwin"
+        boxname = "TM-2T"
+    elif getBoxType() == "tmsingle":
+        box = "tmtwin"
+        boxname = "TM-Single"
+    #Ixussone
+    elif getBoxType().lower().startswith('ixuss'):
+        box = "ixuss"
+        boxname = "Ixuss One/Zero"
+    #Maram/OdinM9/M9
+    elif getBoxType() == "odinm9":
+        box = "odinm9"
+        boxname = "Odin M9"
+    elif getBoxType() == "odinm7":
+        box = "odinm7"
+        boxname = "Odin M7"
+    elif getBoxType() == "odinm6":
+        box = "odinm7"
+        boxname = "Odin M6"
+    #Dreambox
+    elif getBoxType() == "dm800se":
         box = "dreambox"
         boxname = "Dreambox"
-    
+    #XP1000
+    elif getBoxType().startswith('xp1000'):
+        box = "xp1000"
+        boxname = "XP1000"
+    elif getBoxType().startswith('venton'):
+        box = "Venton"
+    elif getBoxType() == "e3hd":
+        box = "e3hd"
+        boxname = "E3HD"
+	#Xpeed LX-x
+    elif getMachineBrand().startswith('GI'):
+        box = "inihde"
+        boxname = "GI Xpeed LX"
+
 except:
     pass
 
@@ -153,7 +202,7 @@ class Hdf_Downloader(Screen):
         }, -1)
         self["key_red"] = Label(_("Cancel"))
         self["key_green"] = Label(_("Download"))
-        self["key_blue"] = Label(_("Download "))
+        self["key_blue"] = Label(_(" "))
         self["key_1"] = Label(_("   Plugins"))
         self["key_2"] = Label(_("   Updates"))
         self["key_3"] = Label(_("   Softcams"))
@@ -215,6 +264,8 @@ class Hdf_Downloader(Screen):
                         self.list.append((_(self.filesArray[i][3].split('.')[0]), self.filesArrayClean[i] , "" + self.filesArraySplit[i][2] + "", "" + self.filesArraySplit[i][3] + "", "download"))
                     if self.switch == "skin":
                         self.list.append((_(self.filesArray[i][3].split('.')[0]), self.filesArrayClean[i] , "" + self.filesArraySplit[i][2] + "", "" + self.filesArraySplit[i][3] + "", "download"))
+                    if self.switch == "update":
+                        self.list.append((_(self.filesArray[i][3].split('.')[0]), self.filesArrayClean[i] , "" + self.filesArraySplit[i][2] + "", "" + self.filesArraySplit[i][3] + "", "download"))
                     if self.switch == "softcam":
                         self.list.append((_(self.filesArray[i][3].split('.')[0]), self.filesArrayClean[i] , "" + self.filesArraySplit[i][2] + "", "" + self.filesArraySplit[i][3] + "", "download"))
                     if self.switch == "picon":
@@ -228,6 +279,8 @@ class Hdf_Downloader(Screen):
                         else:
                             self.list.append((_(self.filesArray[i][3].split('.')[0]), self.filesArrayClean[i] , "" + self.filesArraySplit[i][2] + "", "" + self.filesArraySplit[i][3] + "", "download"))
                     if self.switch == "skin":
+                        self.list.append((_(self.filesArray[i][3].split('.')[0]), self.filesArrayClean[i] , "" + self.filesArraySplit[i][2] + "", "" + self.filesArraySplit[i][3] + "", "download"))
+                    if self.switch == "update":
                         self.list.append((_(self.filesArray[i][3].split('.')[0]), self.filesArrayClean[i] , "" + self.filesArraySplit[i][2] + "", "" + self.filesArraySplit[i][3] + "", "download"))
                     if self.switch == "softcam":
                         self.list.append((_(self.filesArray[i][3].split('.')[0]), self.filesArrayClean[i] , "" + self.filesArraySplit[i][2] + "", "" + self.filesArraySplit[i][3] + "", "download"))
@@ -260,7 +313,7 @@ class Hdf_Downloader(Screen):
                         self["blue"].show()
                         self["key_blue"].setText("Preview")
             self["key_green"].setText("Download")
-            self["introduction"].setText("Presione OK para instalar.")
+            self["introduction"].setText("Press OK to install the file.")
             self["description"].setText(self["downloadmenu"].l.getCurrentSelection()[3])
             self["description2"].setText("Description: ")
             self["size"].setText(self["downloadmenu"].l.getCurrentSelection()[2])
@@ -268,24 +321,24 @@ class Hdf_Downloader(Screen):
             Screen.setTitle(self, "Select your Download for " + boxname )
         elif "uninstall" in self["downloadmenu"].l.getCurrentSelection():
             self["key_green"].setText("Remove")
-            self["introduction"].setText("Presione OK Para borrar archivo.")
+            self["introduction"].setText("Press OK to remove the file.")
             self["description"].setText(" ")
             self["description2"].setText(" ")
             self["size"].setText(" ")
             self["size2"].setText(" ")
-            Screen.setTitle(self, "Seleccione Para Eliminar")
+            Screen.setTitle(self, "Select your Removal")
         elif "tmpinst" in self["downloadmenu"].l.getCurrentSelection():
             self["key_green"].setText("Install")
-            self["introduction"].setText("Presione OK para instalar.")
+            self["introduction"].setText("Press OK to install the file.")
             self["description"].setText(" ")
             self["description2"].setText(" ")
             self["size"].setText(" ")
             self["size2"].setText(" ")
-            Screen.setTitle(self, "Selecione Archivo Para Instalar")
+            Screen.setTitle(self, "Select your local file to install")
         elif "cancel" or "none" in self["downloadmenu"].l.getCurrentSelection():
             self["key_green"].setText("Ok")
             self["introduction"].setText(" ")
-            self["description"].setText("Pulse OK Para No Hacer nada")
+            self["description"].setText("Press OK to do nothing")
             self["description2"].setText("Description: ")
             self["size"].setText("0")
             self["size2"].setText("Size: ")
@@ -314,7 +367,7 @@ class Hdf_Downloader(Screen):
             self.anyNewInstalled = True
             Screen.hide(self)
             self.mkNewMenu()
-            self.session.open(MessageBox, ("Se Recomienda Reiniciar Para cojer Los Cambios!"), MessageBox.TYPE_INFO, timeout=10).setTitle(_("Desistalar"))
+            self.session.open(MessageBox, ("It's recommented to restart box for changes taking place!"), MessageBox.TYPE_INFO, timeout=10).setTitle(_("Uninstall complete"))
         else:
             self.close()
 
@@ -385,11 +438,27 @@ class Hdf_Downloader(Screen):
 
 ###### Category Controls
 
+    def one(self):
+        self.switch = "extensions"
+        self.mkNewMenu()
+
+    def two(self):
+        self.switch = "update"
+        self.mkNewMenu()
+
     def three(self):
         self.switch = "softcam"
         self.mkNewMenu()
 
-		def six(self):
+    def four(self):
+        self.switch = "skin"
+        self.mkNewMenu()
+
+    def five(self):
+        self.switch = "picon"
+        self.mkNewMenu()
+
+    def six(self):
         self.switch = "tmpinst"
         self.mkNewMenu()
 
@@ -499,6 +568,19 @@ class downloadfile(Screen):
     def downloadPlugin(self):
         bufferThread.startDownloading(self.filename, self.url)
         self.infoTimer.start(300, False)
+
+    def updateInfo(self):
+        if bufferThread.error != "":
+            self["info"].setText(bufferThread.error)
+            self.infoTimer.stop()
+        else:
+            progress = int(bufferThread.progress)
+            self["progress"].setValue(progress)
+            self["precent"].setText(_("%s%%") % (progress))
+            if progress == 100:
+                self.infoTimer.stop()
+                self.session.openWithCallback(self.install, MessageBox, _("Download complete. Install now?"), MessageBox.TYPE_YESNO).setTitle(_("Install?"))
+                self.close(True)
 
     def okClicked(self):
         if self.Shown == True:
