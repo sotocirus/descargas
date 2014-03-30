@@ -52,16 +52,7 @@ except:
     boxdesc = "HDFreaks Toolbox"
 	
 try:
-    #ET Boxen
-    if getBoxType().startswith('et9'):
-		box = "ET9x00"
-    elif getBoxType().startswith('et6'):
-		box = "ET6x00"
-    elif getBoxType().startswith('et5'):
-		box = "ET5x00"
-    elif getBoxType().startswith('et4'):
-		box = "ET4x00"
-    #VU Boxen
+   #VU Boxen
     elif getBoxType() == "vuduo":
         box = "Vu+Duo"
     elif getBoxType() == "vuduo2":
@@ -75,52 +66,14 @@ try:
         box = "GigaBlue"
     elif getBoxType() == "gbquad":
         box = "GigaBlue"
-    #Technomates
-    elif getBoxType() == "tmtwin":
-        box = "TM-Twin"
-    #Ixussone
-    elif getBoxType().lower().startswith('ixuss'):
-        box = "Ixuss"
-    #Maram/OdinM9
-    elif getBoxType() == "odinm9":
-        box = "OdinM9"
-    elif getBoxType() == "odinm7":
-        box = "OdinM7"
-    elif getBoxType() == "odinm6":
-        box = "OdinM6"
+    
     #Dreambox
     elif getBoxType() == "dm800se":
         box = "Dreambox"
-    #XP1000
-    elif getBoxType().startswith('xp1000'):
-        box = "XP1000"
-    elif getBoxType().startswith == 'venton':
-        box = "Venton"
-    elif getBoxType() == "e3hd":
-        box = "E3HD"
-    elif getMachineBrand().startswith('GI'):
-        box = "GI Xpeed LX"
+   
 except:
     pass
 
-try:		
-	if getMachineName() == 'STARSAT-LX':
-		if os.path.exists("/etc/enigma2/.opticum") is True: #touch this file to show boxtye in toolbox
-			box = "Opticum AX-Odin"
-		else:
-			box = "Starsat-LX"
-	elif getMachineName().startswith('Golden'):
-		box = "GI Xpeed LX"
-	elif getMachineName() == 'SF8 HD':
-		box = "SF8 HD"
-	elif getBoxType() == 'Ixuss One':
-		boxdesc = "Ixuss One"
-		getMachineName = "Ixuss On"
-	elif getBoxType() == 'Ixuss Zero':
-		boxdesc = "Ixuss Zero"
-		getMachineName = "Ixuss Zero"
-except:
-    pass
 
 ##read .brand and .machine for other OEMs
 brandfile = "/etc/.brand"
@@ -135,42 +88,6 @@ if os.path.exists(machinefile) is True:
 	boxmachine = machine.readline().lower()
 	machine.close()
 
-#change some names that are reading in .brand file
-if box == 'opticum':
-	box = "Opticum AX-Odin"
-
-try:
-	os.system("echo ~~~ Box Info ~~~~~~~~~~~~~~~~~~~~"" > /etc/enigma2/boxinformations")
-	os.system("echo getMachineName = " + getMachineName() + " >> /etc/enigma2/boxinformations")
-	os.system("echo getMachineBrand = " + getMachineBrand() + " >> /etc/enigma2/boxinformations")
-	os.system("echo getBoxType = " + getBoxType() + " >> /etc/enigma2/boxinformations")
-	os.system("echo getBrandOEM = " + getBrandOEM() + " >> /etc/enigma2/boxinformations")
-	os.system("echo getDriverDate = " + getDriverDate() + " >> /etc/enigma2/boxinformations")
-	os.system("echo getImageVersion = " + getImageVersion() + " >> /etc/enigma2/boxinformations")
-	os.system("echo getImageBuild = " + getImageBuild() + " >> /etc/enigma2/boxinformations")
-	os.system("echo ~~~ CPU Info ~~~~~~~~~~~~~~~~~~~~"" >> /etc/enigma2/boxinformations")
-	os.system("cat /proc/cpuinfo >> /etc/enigma2/boxinformations")
-except:
-    pass
-
-os.system("chmod 755 -R /usr/lib/enigma2/python/Plugins/Extensions/SF_TEAM")
-
-# remove some unwanted entries in menu files
-if not getBoxType().startswith('et'):
-	os.system("find /usr/lib/enigma2/python/Plugins/Extensions/SF_TEAM/menu/tools.cfg -type f -exec sed -i '/HbbTV/d' {} \;")
-if not getBoxType().startswith('gb'):
-	os.system("find /usr/lib/enigma2/python/Plugins/Extensions/SF_TEAM/menu/fixes.cfg -type f -exec sed -i '/fix_gb_display/d' {} \;")
-	
-# plugin calling support comes here ...
-pluginpath = "/usr/lib/enigma2/python/Plugins/"
-
-from Screens.Ci import *
-from Screens.PluginBrowser import *
-from Screens.SkinSelector import SkinSelector
-from Plugins.SystemPlugins.SoftwareManager.plugin import *
-
-if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/SF_TEAM/plugin.py"):
-    os.remove("/usr/lib/enigma2/python/Plugins/Extensions/SF_TEAM/plugin.py")
 
 # SoftcamManager
 if os.path.exists("%s/Extensions/SoftcamManager" %pluginpath) is True:
