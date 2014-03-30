@@ -193,14 +193,14 @@ def autostart(reason, **kwargs):
 
 def menu(menuid, **kwargs):
     if menuid == "mainmenu":
-        return [(_("SF Adoons " + boxdesc + ""), main, "SF_Adoons", 10)]
+        return [(_("SF Add-ons " + boxdesc + ""), main, "SF_Adoons", 10)]
     return []
 
 def Plugins(**kwargs):
     try:
 	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart),
-			PluginDescriptor(name=" SF Adoons " + boxdesc + "", description="Addons, Scripts, Tools", where = PluginDescriptor.WHERE_EXTENSIONSMENU, icon="SF.png", fnc=main),
-            PluginDescriptor(name="SF Adoons " + boxdesc + "", description="Addons, Scripts, Tools", where = PluginDescriptor.WHERE_MENU, fnc=menu),
+			PluginDescriptor(name=" SF Add-ons " + boxdesc + "", description="Addons, Scripts, Tools", where = PluginDescriptor.WHERE_EXTENSIONSMENU, icon="SF.png", fnc=main),
+            PluginDescriptor(name="SF Add-ons " + boxdesc + "", description="Addons, Scripts, Tools", where = PluginDescriptor.WHERE_MENU, fnc=menu),
             PluginDescriptor(where = PluginDescriptor.WHERE_FILESCAN, fnc = filescan)]
     except:
 	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart),PluginDescriptor(name="SF_TEAM Adoons" + boxdesc + "", description="Addons, Scripts, Tools", where = [PluginDescriptor.WHERE_PLUGINMENU , PluginDescriptor.WHERE_EXTENSIONSMENU], icon="SF.png", fnc=main),PluginDescriptor(name = "SF_TEAM Adoons" + boxdesc + "", description = "Addons, Scripts, Tools", where = PluginDescriptor.WHERE_MENU, fnc = menu)]
@@ -336,7 +336,7 @@ class Fantastic(Screen):
            elif mfselected is "mfsc2":
                self.session.openWithCallback(self.FantasticMenu(""),ScSelection2)
            elif mfselected is "mfxyz":
-               title1=_("SF Adoons")
+               title1=_("SF Add-ons")
                title2=_("~~~~~~~~~~~~~~~~")
                title3=_("visite www.soldiersatforum.com")
                title="%s\n%s\n%s\n" % (title1, title2, title3)
