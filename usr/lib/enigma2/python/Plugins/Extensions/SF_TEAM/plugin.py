@@ -199,11 +199,11 @@ def menu(menuid, **kwargs):
 def Plugins(**kwargs):
     try:
 	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart),
-			PluginDescriptor(name=" SF Add-ons " + boxdesc + "", description="Addons, Scripts, Tools", where = PluginDescriptor.WHERE_EXTENSIONSMENU, icon="SF.png", fnc=main),
-            PluginDescriptor(name="SF Add-ons " + boxdesc + "", description="Addons, Scripts, Tools", where = PluginDescriptor.WHERE_MENU, fnc=menu),
+			PluginDescriptor(name=" SF Add-ons " + boxdesc + "", description="Descargar Emu", where = PluginDescriptor.WHERE_EXTENSIONSMENU, icon="SF.png", fnc=main),
+            PluginDescriptor(name="SF Add-ons " + boxdesc + "", description="Descargar Emu", where = PluginDescriptor.WHERE_MENU, fnc=menu),
             PluginDescriptor(where = PluginDescriptor.WHERE_FILESCAN, fnc = filescan)]
     except:
-	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart),PluginDescriptor(name="SF_TEAM Adoons" + boxdesc + "", description="Addons, Scripts, Tools", where = [PluginDescriptor.WHERE_PLUGINMENU , PluginDescriptor.WHERE_EXTENSIONSMENU], icon="SF.png", fnc=main),PluginDescriptor(name = "SF_TEAM Adoons" + boxdesc + "", description = "Addons, Scripts, Tools", where = PluginDescriptor.WHERE_MENU, fnc = menu)]
+	return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart),PluginDescriptor(name="SF_TEAM Adoons" + boxdesc + "", description="Descargar Emu", where = [PluginDescriptor.WHERE_PLUGINMENU , PluginDescriptor.WHERE_EXTENSIONSMENU], icon="SF.png", fnc=main),PluginDescriptor(name = "SF_TEAM Adoons" + boxdesc + "", description = "Descargar Emu", where = PluginDescriptor.WHERE_MENU, fnc = menu)]
 
 def main(session,**kwargs):
     try:
