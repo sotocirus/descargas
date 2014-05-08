@@ -79,7 +79,7 @@ try:
         box = "odinm7"
         boxname = "Odin M6"
     #Dreambox
-    elif getBoxType() == "dm800se":
+    elif getBoxType() == "dm800":
         box = "dreambox"
         boxname = "Dreambox"
     #XP1000
