@@ -89,7 +89,7 @@ try:
     elif getBoxType() == "odinm6":
         box = "OdinM6"
     #Dreambox
-    elif getBoxType() == "dm800se":
+    elif getBoxType() == "dm800":
         box = "Dreambox"
     #XP1000
     elif getBoxType().startswith('xp1000'):
