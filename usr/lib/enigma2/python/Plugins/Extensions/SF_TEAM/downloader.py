@@ -168,7 +168,7 @@ class Hdf_Downloader(Screen):
 ##### Download Source File
         try:
             import urllib
-            urllib.urlretrieve ("http://www.soldiersatforum.com/e2/down.hdf", "/tmp/.down.hdf")
+            urllib.urlretrieve ("http://addons.hdfreaks.cc/feeds/down.hdf", "/tmp/.down.hdf")
         except:
             os.system("touch /tmp/.down.hdf")
 ##### Lets Start
